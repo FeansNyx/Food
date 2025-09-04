@@ -30,7 +30,7 @@
 <body>
   <h2 style="text-align: center;">Login</h2>
   <form onsubmit="login(event)">
-    <input type="email" id="email" placeholder="Email" required />
+    <input type="text" id="no_hp" placeholder="Nomor HP" required />
     <input type="password" id="password" placeholder="Password" required />
     <button>Login</button>
   </form>
@@ -43,12 +43,12 @@
   <script>
     function login(e) {
       e.preventDefault();
-      const email = document.getElementById('email').value.trim();
+      const no_hp = document.getElementById('no_hp').value.trim();
       const password = document.getElementById('password').value.trim();
 
       // Ambil daftar user dari localStorage
       let users = JSON.parse(localStorage.getItem('users')) || [];
-      const user = users.find(u => u.Email === email && u.Password === password);
+      const user = users.find(u => u.no_hp === no_hp && u.Password === password);
 
       if (user) {
         alert("Login berhasil!");
@@ -61,3 +61,4 @@
   </script>
 </body>
 </html>
+
