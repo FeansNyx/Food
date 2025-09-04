@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <title>Daftar Akun</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <style>
     body { font-family: sans-serif; padding: 2rem; background-color: #fffdf8; }
     form {
@@ -31,7 +30,7 @@
 <body>
   <h2 style="text-align: center;">Daftar</h2>
   <form onsubmit="register(event)">
-    <input type="email" id="email" placeholder="Email" required />
+    <input type="text" id="no_hp" placeholder="Nomor HP" required />
     <input type="password" id="password" placeholder="Password" required />
     <button>Daftar</button>
   </form>
@@ -44,25 +43,27 @@
   <script>
     function register(e) {
       e.preventDefault();
-      const email = document.getElementById('email').value.trim();
+      const no_hp = document.getElementById('no_hp').value.trim();
       const password = document.getElementById('password').value.trim();
 
       // Ambil data user dari localStorage (jika ada)
       let users = JSON.parse(localStorage.getItem('users')) || [];
 
       // Cek jika email sudah terdaftar
-      if (users.some(user => user.Email === email)) {
-        alert("Email sudah terdaftar!");
+      if (users.some(u => u.no_hp === no_hp)) {
+        alert("Nomor HP sudah terdaftar!");
         return;
       }
 
       // Tambahkan user baru
-      users.push({ Email: email, Password: password });
+      const newUser = { no_hp, Password: password };
+      users.push(newUser);
       localStorage.setItem('users', JSON.stringify(users));
 
-      alert("Registrasi berhasil! Data tersimpan di Excel.");
+      alert("Registrasi berhasil! Silahkan Login.");
       window.location.href = "login.html";
     }
   </script>
 </body>
 </html>
+
