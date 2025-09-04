@@ -117,7 +117,7 @@
 
     // Ambil semua pesanan dan filter berdasarkan user login
     const semuaPesanan = JSON.parse(localStorage.getItem("pesanan")) || [];
-    const pesananSaya = semuaPesanan.filter(p => p.userEmail === user.Email);
+    const pesananSaya = semuaPesanan.filter(p => p.userHP === user.no_hp);
 
     const container = document.getElementById("riwayat");
 
@@ -186,3 +186,4 @@
   </script>
 </body>
 </html>
+
