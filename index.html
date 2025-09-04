@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BUSU YATI</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      scroll-behavior: smooth;
+      background-color: #000;
+      color: #fff;
+    }
+
+    header {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .logo img {
+      height: 60px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #f4c542;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #555;
+      top: 30px;
+      right: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      z-index: 100;
+    }
+
+    .dropdown:focus-within .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 10px 15px;
+      color: #f4c542;
+      text-decoration: none;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #333;
+    }
+
+    .hero {
+      background-image: url("images/kraken.jpg");
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: 40px;
+      color: #f4c542;
+      font-style: italic;
+    }
+
+    .hero h1 {
+      font-size: 80px;
+      margin: 20px 0;
+      font-weight: bold;
+    }
+
+    .hero p {
+      font-size: 22px;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      background-color: #f4c542;
+      color: black;
+      padding: 12px 24px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .scroll-up {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 28px;
+      background-color: #f4c542;
+      border-top-left-radius: 40px;
+      border-top-right-radius: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 20;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.2);
+      transition: bottom 0.6s ease;
+    }
+
+    .scroll-up.active {
+      bottom: 50%;
+      transform: translate(-50%, 50%);
+    }
+
+    .scroll-up .arrow-up {
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 12px solid black;
+    }
+
+    .white-panel {
+      position: fixed;
+      bottom: -100%;
+      left: 0;
+      width: 100%;
+      height: 50vh;
+      background-color: white;
+      z-index: 5;
+      transition: bottom 0.6s ease;
+      display: flex;
+      justify-content: space-evenly;
+	  align-items: center;
+      padding: 30px 50px;
+      color: #000;
+    }
+
+    .white-panel.active {
+      bottom: 0;
+    }
+
+    .white-panel .text-side {
+      flex: 1;
+      max-width: 60%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+    }
+
+    .white-panel .text-side h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .white-panel .text-side p {
+      font-size: 18px;
+      line-height: 1.5;
+      text-align: justify;
+    }
+
+    .white-panel .image-side {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+
+    .white-panel .image-side img {
+      max-width: 200%;
+      max-height: 200px;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+    @media (max-width: 768px) {
+      .white-panel .text-side {
+        max-width: 90%;
+      }
+      .white-panel {
+        flex-direction: column;
+        padding: 30px 30px;
+        text-align: center;
+      }
+
+      .white-panel .image-side {
+		flex: none;
+		aligh-item: center;
+	  }
+
+      .white-panel .image-side img {
+        max-width: 100%;
+        max-height: 200px;
+        border-radius: 12px;
+        object-fit: cover;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="images/logo.png" alt="Logo" />
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="about-us.html">About Us</a></li>
+        <li><a href="pesanan.html">Pesanan Saya</a></li>
+        <li class="dropdown">
+          <a href="#">Account ▾</a>
+          <div class="dropdown-content">
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+            <a href="cart.html">Keranjang</a>
+            <a href="#" onclick="logout()" >Logout</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="hero">
+    <div class="hero-content">
+      <h2>Welcome</h2>
+      <h1>BUSU YATI</h1>
+      <p>Makanlah dengan penuh perhatian dan nikmati setiap gigitannya</p>
+      <a href="menu.html" class="btn">Explore</a>
+    </div>
+  </main>
+
+  <!-- Tombol setengah lingkaran -->
+  <div class="scroll-up" id="circleBtn">
+    <div class="arrow-up"></div>
+  </div>
+
+  <!-- Panel putih dengan teks dan gambar -->
+  <div class="white-panel" id="whitePanel">
+    <div class="text-side">
+      <h2>chef moto</h2>
+      <p>Makanan tidak hanya memuaskan perut, tetapi juga memenuhi jiwa dengan kelezatan dan kenikmatan. Setiap hidangan memiliki cerita uniknya sendiri, dan kata-kata adalah cara yang indah untuk merayakan keberagaman rasa dan tekstur yang dapat ditemui dalam dunia kuliner. Dalam setiap suapan, ada cerita dan kenangan yang terkandung. Penting untuk menghargai setiap momen makan sebagai sebuah kesempatan untuk menikmati hidangan dengan sepenuh hati.</p>
+    </div>
+    <div class="image-side">
+      <img src="images/coocker.jpg" alt="chef" />
+    </div>
+  </div>
+
+  <script>
+    const circleBtn = document.getElementById('circleBtn');
+    const whitePanel = document.getElementById('whitePanel');
+    let isActive = false;
+
+    circleBtn.addEventListener('click', () => {
+      isActive = !isActive;
+
+      if (isActive) {
+        circleBtn.classList.add('active');
+        whitePanel.classList.add('active');
+        document.body.style.overflow = 'hidden'; // tetap disable scroll
+      } else {
+        circleBtn.classList.remove('active');
+        whitePanel.classList.remove('active');
+      }
+    });
+        // Fungsi logout
+    function logout() {
+      localStorage.removeItem('loggedInUser');
+      alert("Anda telah logout!");
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>

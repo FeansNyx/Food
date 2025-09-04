@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tentang Kami - ILCE Coffee</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      font-family: 'Segoe UI', sans-serif;
+      background: url('images/bg.jpg') no-repeat center center;
+      background-size: cover;
+      background-attachment: fixed;
+      color: #fff;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .logo img {
+      height: 60px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #f4c542;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #555;
+      top: 30px;
+      right: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      z-index: 100;
+    }
+
+    .dropdown:focus-within .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 10px 15px;
+      color: #f4c542;
+      text-decoration: none;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #333;
+    }
+
+    .about-section {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 80px 80px 0;
+      gap: 60px;
+    }
+
+    .text-side {
+      flex: 1;
+      padding: 0 20px;
+    }
+
+    .text-side h1, .text-side h2 {
+      font-size: 36px;
+      color: #f4c542;
+      margin-bottom: 20px;
+    }
+
+    .text-side p {
+      font-size: 18px;
+      line-height: 1.6;
+      text-align: justify;
+      margin-bottom: 20px;
+    }
+
+    .image-side {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      padding: 0 20px;
+    }
+
+    .image-side img {
+      max-width: 100%;
+      max-height: 80vh;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    @media (max-width: 768px) {
+      .about-section {
+        flex-direction: column;
+        padding: 80px 20px;
+        text-align: center;
+        gap: 30px;
+      }
+
+      .about-section:nth-of-type(2) {
+        flex-direction: column-reverse;
+      }
+
+      .text-side {
+        padding: 0;
+        margin-bottom: 10px;
+      }
+
+      .image-side {
+        padding: 0;
+        margin-bottom: 10px;
+      }
+
+      .text-side h1, .text-side h2 {
+        font-size: 28px;
+      }
+
+      .text-side p {
+        font-size: 16px;
+        text-align: justify;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="images/logo.png" alt="Logo" />
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="about-us.html">About Us</a></li>
+        <li><a href="pesanan.html">Pesanan Saya</a></li>
+        <li class="dropdown">
+		  <a href="#" class="account-link">Account ▾</a>
+		  <div class="dropdown-content" id="account-dropdown">
+		    <a href="login.html" >Login</a>
+		    <a href="register.html" >Register</a>
+		    <a href="cart.html">Keranjang</a>
+		    <a href="#" onclick="logout()" >Logout</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Bagian 1: Tentang Kami -->
+    <section class="about-section">
+      <div class="text-side">
+        <h1>Tentang Kami</h1>
+        <p>
+          Alasan utama saya mendirikan rumah makan ini adalah keinginan untuk membawa cita rasa masakan Padang yang autentik ke masyarakat Sarolangun. Selain itu, saya ingin memanfaatkan keahlian memasak yang sudah saya pelajari sejak muda agar bisa menjadi sumber penghasilan tetap bagi keluarga sekaligus membuka lapangan pekerjaan untuk orang sekitar.
+        </p>
+        <p>
+          Rumah makan ini mulai beroperasi pada tahun 2009. Perjalanan awalnya tidak mudah—saya memulai dengan modal yang sangat terbatas dan hanya memiliki beberapa menu andalan seperti rendang, gulai ayam, dan sambal ijo. Waktu itu, saya masih mengandalkan tenaga keluarga dan melayani pelanggan dari mulut ke mulut. Seiring berjalannya waktu, pelanggan semakin banyak, dan akhirnya kami bisa memperluas menu serta menambah karyawan.
+        </p>
+        <p>
+          Konsep utama rumah makan ini adalah masakan Padang tradisional dengan rasa rumahan, di mana pelanggan bisa merasakan masakan yang seperti dibuat oleh ibu sendiri di rumah, namun dengan pelayanan cepat dan tempat yang nyaman. Kami juga mengusung tema "Asli Rasa Minang, Hangat Suasana Kampung" agar orang-orang selalu merasa dekat dengan budaya Minang.
+        </p>
+      </div>
+      <div class="image-side">
+        <img src="images/CEO.jpg" alt="ceo">
+      </div>
+    </section>
+
+    <!-- Bagian 2: Latar Belakang -->
+    <section class="about-section">
+      <div class="image-side">
+        <img src="images/kp.jpg" alt="kp">
+      </div>
+      <div class="text-side">
+        <h2>BUSU YATI</h2>
+        <p>
+          Inspirasi saya banyak datang dari masa kecil di kampung halaman di Sumatera Barat, di mana saya sering membantu orang tua memasak untuk acara keluarga dan pesta nagari. Dari situlah saya belajar bahwa kekuatan masakan Padang ada pada bumbu yang kaya dan proses memasak yang sabar. Itu yang saya terapkan sampai sekarang.
+        </p>
+        <p>
+          Target utama kami adalah keluarga dan pekerja kantoran di sekitar Sarolangun. Untuk keluarga, kami menyediakan menu yang bervariasi dan porsi besar yang cocok dimakan bersama. Sedangkan untuk pekerja kantoran, kami sediakan paket praktis yang bisa dibawa pulang atau diantar ke kantor dengan harga terjangkau, namun tetap mempertahankan kualitas rasa.
+        </p>
+      </div>
+    </section>
+  </main>
+  <script>
+      // Fungsi logout
+    function logout() {
+      localStorage.removeItem('loggedInUser');
+      alert("Anda telah logout!");
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>

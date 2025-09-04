@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; background-color: #fffdf8; }
+    form {
+      max-width: 400px; margin: auto; background: white;
+      padding: 2rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, button {
+      display: block; width: 100%; margin-bottom: 1rem;
+      padding: 0.8rem; border-radius: 6px;
+    }
+    button { background: #4CAF50; color: white; border: none; cursor: pointer; }
+    .link-group {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+    .link-group a {
+      display: block;
+      margin: 0.3rem 0;
+      color: #6b4f3b;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align: center;">Login</h2>
+  <form onsubmit="login(event)">
+    <input type="email" id="email" placeholder="Email" required />
+    <input type="password" id="password" placeholder="Password" required />
+    <button>Login</button>
+  </form>
+
+  <div class="link-group">
+    <a href="register.html">Daftar sekarang</a>
+    <a href="index.html">Kembali ke home</a>
+  </div>
+
+  <script>
+    function login(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      // Ambil daftar user dari localStorage
+      let users = JSON.parse(localStorage.getItem('users')) || [];
+      const user = users.find(u => u.Email === email && u.Password === password);
+
+      if (user) {
+        alert("Login berhasil!");
+        localStorage.setItem('loggedInUser', JSON.stringify(user));
+        window.location.href = "menu.html";
+      } else {
+        alert("Email atau password salah!");
+      }
+    }
+  </script>
+</body>
+</html>

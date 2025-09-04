@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Riwayat Pesanan</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #fffdf8;
+      padding: 2rem;
+      margin: 0;
+    }
+
+    h1 {
+      color: #4CAF50;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .pesanan-box {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      max-width: 700px;
+      margin: 1.5rem auto;
+    }
+
+    .item {
+      border-bottom: 1px solid #eee;
+      padding: 0.5rem 0;
+    }
+
+    .item:last-child {
+      border-bottom: none;
+    }
+
+    .item h3 {
+      margin: 0;
+    }
+
+    .item p {
+      margin: 0.2rem 0;
+      color: #666;
+    }
+
+    .total {
+      font-weight: bold;
+      text-align: right;
+      margin-top: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .alamat {
+      margin-top: 1rem;
+      font-style: italic;
+      color: #333;
+    }
+
+    .tanggal {
+      font-size: 0.9rem;
+      color: #999;
+      text-align: right;
+      margin-top: 0.5rem;
+    }
+
+    .actions {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .button {
+      flex: 1;
+      padding: 0.8rem 1rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .done-button {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .back-button {
+      background-color: #6b4f3b;
+      color: white;
+    }
+
+    .empty-message {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #777;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Riwayat Pesanan Anda</h1>
+  <div id="riwayat"></div>
+  <div class="link-group" style="text-align: center; margin-top: 1rem;">
+	  <a href="index.html" style="color: #6b4f3b; text-decoration: none;">Kembali ke Home</a>
+  </div>
+
+
+  <script>
+    // Cek login user
+    const user = JSON.parse(localStorage.getItem('loggedInUser'));
+    if (!user) {
+      alert("Anda harus login untuk melihat pesanan.");
+      window.location.href = "login.html";
+    }
+
+    // Ambil semua pesanan dan filter berdasarkan user login
+    const semuaPesanan = JSON.parse(localStorage.getItem("pesanan")) || [];
+    const pesananSaya = semuaPesanan.filter(p => p.userEmail === user.Email);
+
+    const container = document.getElementById("riwayat");
+
+    if (pesananSaya.length === 0) {
+      container.innerHTML = `<p class="empty-message">Belum ada pesanan.</p>`;
+    } else {
+      container.innerHTML = pesananSaya.map((p, index) => {
+        let total = 0;
+        const diskonPersen = parseInt(p.diskon || "0");
+
+        const itemsHTML = p.cart.map(item => {
+          const harga = parseInt(item.price.replace(/\D/g, "")) || item.price;
+          const qty = item.qty || 1;
+          const subtotal = harga * qty;
+          total += subtotal;
+          return `
+            <div class="item">
+              <h3>${item.name} (${qty}x)</h3>
+              <p>${item.temperature ? item.temperature : ""}</p>
+              <p>Rp${harga.toLocaleString()} x ${qty}</p>
+            </div>
+          `;
+        }).join("");
+
+        if (diskonPersen > 0) {
+          const potongan = Math.round((diskonPersen / 100) * total);
+          total -= potongan;
+        }
+
+        return `
+          <div class="pesanan-box">
+            ${itemsHTML}
+            ${diskonPersen > 0 ? `<p style="color:green;text-align:right;">Diskon: -${diskonPersen}%</p>` : ""}
+            <p class="total">Total: Rp${total.toLocaleString()}</p>
+            <p class="alamat">Dikirim ke: ${p.alamat}</p>
+            <p class="tanggal">Tanggal: ${p.tanggal}</p>
+            <div class="actions">
+              <button class="button done-button" onclick="hapusPesanan(${index})">Pesanan Selesai</button>
+              <button class="button back-button" onclick="kembaliKeMenu()">Kembali ke Menu</button>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function hapusPesanan(index) {
+      const semuaPesanan = JSON.parse(localStorage.getItem("pesanan")) || [];
+      const pesananSaya = semuaPesanan.filter(p => p.userEmail === user.Email);
+
+      // Hapus hanya pesanan user ini di posisi yang sesuai
+      const pesananIndexGlobal = semuaPesanan.findIndex(
+        p => p.userEmail === pesananSaya[index].userEmail && p.tanggal === pesananSaya[index].tanggal
+      );
+
+      if (pesananIndexGlobal !== -1) {
+        semuaPesanan.splice(pesananIndexGlobal, 1);
+        localStorage.setItem("pesanan", JSON.stringify(semuaPesanan));
+        alert("Pesanan dihapus.");
+        window.location.reload();
+      }
+    }
+
+    function kembaliKeMenu() {
+      window.location.href = "menu.html";
+    }
+  </script>
+</body>
+</html>
