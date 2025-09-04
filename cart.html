@@ -205,7 +205,7 @@
           <div class="cart-details">
             <h3>${item.name}</h3>
             <p>${item.description}</p>
-            <span>${item.price}${item.temperature ? ` • ${item.temperature}` : ""}</span>
+            <span>${item.price}</span>
             <div class="quantity-control">
               <button class="quantity-button" onclick="changeQty(${index}, -1)">−</button>
               <div class="quantity-box">${item.qty}x</div>
@@ -303,7 +303,7 @@
 
 	  // Buat objek pesanan baru
 	  const pesananBaru = {
-	    userEmail: user.Email,
+	    userEmail: user.no_hp,
 	    cart,
 	    alamat,
 	    diskon,
@@ -350,3 +350,4 @@
   </script>
 </body>
 </html>
+
