@@ -164,11 +164,11 @@
 
     function hapusPesanan(index) {
       const semuaPesanan = JSON.parse(localStorage.getItem("pesanan")) || [];
-      const pesananSaya = semuaPesanan.filter(p => p.userEmail === user.Email);
+      const pesananSaya = semuaPesanan.filter(p => p.userHP === user.no_hp);
 
       // Hapus hanya pesanan user ini di posisi yang sesuai
       const pesananIndexGlobal = semuaPesanan.findIndex(
-        p => p.userEmail === pesananSaya[index].userEmail && p.tanggal === pesananSaya[index].tanggal
+        p => p.userHP === pesananSaya[index].userHP && p.tanggal === pesananSaya[index].tanggal
       );
 
       if (pesananIndexGlobal !== -1) {
@@ -185,5 +185,6 @@
   </script>
 </body>
 </html>
+
 
 
